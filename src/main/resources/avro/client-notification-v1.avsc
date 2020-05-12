@@ -1,0 +1,11 @@
+{
+    "namespace": "br.com.mecontrata.management.client.domain.avro",
+    "type": "record",
+    "name": "ClientNotification",
+    "version": "1",
+    "fields": [
+        {"name": "firstName", "type": "string", "doc": "Primeiro nome do cliente"},
+        {"name": "lastName",  "type": "string", "doc": "Sobrenome do cliente"},
+        {"name": "email", "type": "string", "doc": "Email do cliente"}
+     ]
+}

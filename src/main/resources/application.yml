@@ -1,0 +1,52 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: Management Client Application
+  data:
+    mongodb:
+      database: user
+      authentication-database: admin
+      uri: mongodb://administrador:StRoNgP%40ssWorD@host.docker.internal:27017/user?authSource=admin
+
+security:
+  oauth2:
+    resource:
+      id: resource-server-rest-api
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 8002
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+kafka:
+  bootstrap:
+    servers: 127.0.0.1:9092
+  acks: 1
+  retries: 10
+  schema:
+    registry:
+      url: http://127.0.0.1:8081
+  topic:
+    email: my-topic-email
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
