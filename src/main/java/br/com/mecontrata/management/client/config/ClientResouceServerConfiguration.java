@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationManager;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableResourceServer
@@ -26,7 +27,7 @@ public class ClientResouceServerConfiguration extends ResourceServerConfigurerAd
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId(resourceId).authenticationManager(authenticationManagerBean())
-                .tokenExtractor(new CustomTokenExtractor());
+                .tokenExtractor(new CustomTokenExtractor()).authenticationEntryPoint(customAuthEntryPoint());
     }
 
     @Bean
@@ -49,5 +50,9 @@ public class ClientResouceServerConfiguration extends ResourceServerConfigurerAd
                 .anyRequest().authenticated();
     }
 
+    @Bean
+    public AuthenticationEntryPoint customAuthEntryPoint(){
+        return new RestClientAuthenticationEntryPoint();
+    }
 
 }
